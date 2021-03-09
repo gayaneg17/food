@@ -4,6 +4,7 @@ const search = document.getElementById('search'),
   mealsEl = document.getElementById('meals'),
   resultHeading = document.getElementById('result-heading'),
   single_mealEl = document.getElementById('single-meal');
+  const BASE_URL = 'https://www.themealdb.com/api/json/v1/1/'
 
   function searchMeal(e){
       e.preventDefault();
@@ -11,7 +12,7 @@ const search = document.getElementById('search'),
       const term = search.value;
 
       if(term.trim()){
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
+        fetch(`${BASE_URL}search.php?s=${term}`)
         .then(res => res.json())
         .then(data => {
           // console.log(data, 'data');
@@ -44,7 +45,7 @@ const search = document.getElementById('search'),
   }
 
   function getMealById(){
-    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+    fetch(`${BASE_URL}lookup.php?i=${mealID}`)
     .then(res => res.json())
     .then(data => {
       const meal = data.meals[0];
@@ -58,7 +59,7 @@ const search = document.getElementById('search'),
        mealsEl.innerHTML = '';
        resultHeading.innerHTML = '';
 
-        fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+        fetch(`${BASE_URL}random.php`)
         .then(res => res.json())
         .then(data => {
         const meal = data.meals[0];
@@ -114,3 +115,5 @@ function addMealToDOM(meal) {
       getMealById(mealID);
     }
   });
+
+  
